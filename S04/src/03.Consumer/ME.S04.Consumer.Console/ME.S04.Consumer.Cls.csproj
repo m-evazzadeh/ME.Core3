@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>ME.S04.Consumer.Cls</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Customers\" />
+    <Folder Include="Invoices\" />
+    <Folder Include="products\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\01.Core\ME.S04.Core.AppService\ME.S04.Core.AppService.csproj" />
+    <ProjectReference Include="..\..\01.Core\ME.S04.Core.Contract\ME.S04.Core.Contract.csproj" />
+    <ProjectReference Include="..\..\02.Dal\ME.S04.Dal.EF\ME.S04.Dal.EF.csproj" />
+  </ItemGroup>
+
+</Project>
