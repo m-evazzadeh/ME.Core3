@@ -34,7 +34,8 @@ namespace ME.S04.Consumer.cls
                 //{
                 //    CustomerId
                 //});
-                    
+
+                Console.WriteLine(1);
             }
 
 
