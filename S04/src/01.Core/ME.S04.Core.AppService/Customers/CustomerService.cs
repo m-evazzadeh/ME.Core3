@@ -24,6 +24,11 @@ namespace ME.S04.Core.AppService.Customers
             return unitOfWork.CustomerRepo.Add(customerInput);
         }
 
+        public int CreateBy(int id)
+        {
+            return unitOfWork.CustomerRepo.CreateBy(id);
+        }
+
         public CustomerDTO Get(int id)
         {
             return unitOfWork.CustomerRepo.Get(id);

@@ -5,6 +5,8 @@ using ME.S04.Core.DomainModel.General;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System.Linq;
+using System;
 
 namespace ME.S04.Dal.EF.Customers
 {
@@ -26,6 +28,26 @@ namespace ME.S04.Dal.EF.Customers
             });
             customerInput.CustomerId = result.Entity.CustomerId;
             return customerInput;
+        }
+
+        /// <summary>
+        /// shadow property
+        ///<see langword="see::: " cref="ME.S04.Dal.EF.Customers.CustomerConfiguration"/>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int CreateBy(int id)
+        {
+            var customer = ctx.Customers.FirstOrDefault(x => x.CustomerId == id);
+            var retval = ctx.Entry(customer).Property("CreateBy").CurrentValue.ToString();
+            
+            //condition on shadow Property
+            //ctx.Customers.Where(x => EF.Property<DateTime>(x, "LastUpdated"));
+            
+            //for set 
+            //ctx.Entry(customer).Property("CreateBy").CurrentValue = object;
+            
+            return  int.Parse(retval);
         }
 
         public CustomerDTO Get(int id)

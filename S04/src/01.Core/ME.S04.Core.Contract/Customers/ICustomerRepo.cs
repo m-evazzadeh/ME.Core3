@@ -10,6 +10,7 @@ namespace ME.S04.Core.Contract.Customers
         CustomerDTO Add(CustomerDTO customerInput);
         CustomerDTO Get(int id);
         Task<IEnumerable<KeyValueType>> LoadCombo();
+        int CreateBy(int id);
     
     }
 }

@@ -3,10 +3,12 @@ using ME.S04.Core.DomainModel.Customers;
 using ME.S04.Core.DomainModel.General;
 using ME.S04.Core.DomainModel.Invoices;
 using ME.S04.Core.DomainModel.products;
+using ME.S04.Dal.EF.Customers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System.Reflection;
 
 namespace ME.S04.Dal.EF
 {
@@ -66,30 +68,22 @@ namespace ME.S04.Dal.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            if (Database.IsSqlServer())
+                //set this configuration
+            
+
+            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            ///In the example above, only one entity type configuration was registered. Larger applications will require multiple type configurations, and as the scope of the application grows, the developer will have to remember to register all new type configurations. A new extension method,
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+
             //در صورتی که بخواهیم خودمان در زمان اجرای برنامه کوئری بنویسیسم دیگر نیاز به کانفیگ زیر نیست
             //modelBuilder.Query<KeyValueType>().ToView("SqlServerViewName");
 
-            SetHasQueryFilter(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
-        /// <summary>
-        /// در واقع با این متد کلاس هایی که باید حذف منطقی آنها تنظبم کردد نوشته می شود
-        /// در واقع دیگه رکورد هایی که حذف منطقی شده اند هیچ وقت نمایش داده نمی شود
-        /// </summary>
-        /// <param name="modelBuilder"></param>
-        private static void SetHasQueryFilter(ModelBuilder modelBuilder)
-        {
-
-            modelBuilder.Entity<Customer>().HasQueryFilter(x => !x.IsDeleted);
-            //در صورت نیاز برای درست کردن همه کلاس ها که نخواهیم آنها را به صورت استاتیک تعریف کنیم
-            //var type = typeof(ISoftDelete);
-            ////لیست کلاس هایی که باید آنها را برای کوئری بالا آماده کرد
-            //var listOfClassInhertanceFromISoftDelete = typeof(ISoftDelete)
-            //    .Assembly
-            //    .GetTypes()
-            //    .Where(x => type.IsAssignableFrom(x));
-        }
+        
 
         /// <summary>
         /// get name of table with Entity
