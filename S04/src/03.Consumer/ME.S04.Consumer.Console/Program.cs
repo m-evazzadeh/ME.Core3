@@ -43,6 +43,10 @@ namespace ME.S04.Consumer.cls
 
         }
 
+        /// <summary>
+        /// load for combo box sample 
+        /// </summary>
+        /// <param name="uow"></param>
         private static void LoadForComboWithQuryType(IUnitOfWork uow)
         {
             var customerCombo = new CustomerService(uow).LoadCombo().Result;
