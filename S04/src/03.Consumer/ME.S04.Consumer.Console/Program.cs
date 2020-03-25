@@ -6,11 +6,14 @@ using ME.S04.Core.Contract.Customers;
 using ME.S04.Core.Contract.Invoices;
 using ME.S04.Core.Contract.products;
 using ME.S04.Core.DomainModel.Customers.DTO;
+using ME.S04.Core.DomainModel.General;
 using ME.S04.Core.DomainModel.Invoices.DTO;
 using ME.S04.Core.DomainModel.products.DTO;
 using ME.S04.Dal.EF;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ME.S04.Consumer.cls
 {
@@ -23,24 +26,58 @@ namespace ME.S04.Consumer.cls
             DbContextOptionsBuilder<DbContextS04> optionsBuilder = new DbContextOptionsBuilder<DbContextS04>();
             optionsBuilder.UseSqlServer("Server=.; initial Catalog=S04; integrated security=true;");
             DbContextS04 ctx = new DbContextS04(optionsBuilder.Options);
-            CreateDataBaseV2(ctx);
+
+            //CreateDataBaseV2(ctx);
             using (IUnitOfWork uow = new UnitOfWork(ctx))
             {
                 //AddCustomer(uow);
                 //AddProduct(uow);
-                //uow.
-                //IInvoiceService invoiceService = new InvoiceService(uow);
-                //invoiceService.Add(new InvoicePersist
-                //{
-                //    CustomerId
-                //});
-
-                Console.WriteLine(2);
+                //AddInvoice(uow);
+                //var invoiceJustKey = InvoiceEagerLoading(uow);
+                //var invoiceJustKey = InvoiceExplicitLoading(uow);
+                //LoadForComboWithQuryType(uow);
             }
 
 
 
 
+        }
+
+        private static void LoadForComboWithQuryType(IUnitOfWork uow)
+        {
+            var customerCombo = new CustomerService(uow).LoadCombo().Result;
+        }
+
+        private static InvoiceJustKey InvoiceExplicitLoading(IUnitOfWork uow)
+        {
+            return new InvoiceService(uow).ExplicitLoading(1);
+        }
+        private static InvoiceJustKey InvoiceEagerLoading(IUnitOfWork uow)
+        {
+            return new InvoiceService(uow).EagerLoading(1);
+        }
+
+        private static void AddInvoice(IUnitOfWork uow)
+        {
+            var customer = new CustomerService(uow).Get(1);
+            var product1 = new ProductService(uow).Get(1);
+            var product2 = new ProductService(uow).Get(2);
+            var product3 = new ProductService(uow).Get(3);
+            IInvoiceService invoiceService = new InvoiceService(uow);
+            invoiceService.Add(new InvoicePersist
+            {
+                CustomerId = customer.CustomerId
+                ,
+                IssueDate = DateTime.Now
+                ,
+                InvoiceLines = new List<InvoiceLinePersist>
+                    {
+                        new InvoiceLinePersist{ Price = 100 , Qty = 2 , ProductId = product1.ProductId}
+                        ,new InvoiceLinePersist{ Price = 200 , Qty = 2 , ProductId = product2.ProductId}
+                        ,new InvoiceLinePersist{ Price = 200 , Qty = 2 , ProductId = product3.ProductId}
+                    }
+            });
+            uow.SaveChage();
         }
 
         private static void AddProduct(IUnitOfWork uow)

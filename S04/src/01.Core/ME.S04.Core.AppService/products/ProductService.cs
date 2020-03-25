@@ -20,5 +20,10 @@ namespace ME.S04.Core.AppService.products
         {
             return unitOfWork.ProductRepo.Add(productInput);
         }
+
+        public ProductDTO Get(int id)
+        {
+            return unitOfWork.ProductRepo.Get(id);
+        }
     }
 }

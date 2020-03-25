@@ -1,5 +1,6 @@
 ﻿using ME.S04.Core.Contract;
 using ME.S04.Core.DomainModel.Customers;
+using ME.S04.Core.DomainModel.General;
 using ME.S04.Core.DomainModel.Invoices;
 using ME.S04.Core.DomainModel.products;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ namespace ME.S04.Dal.EF
         //چون نمی خواهیم به صورت مستقیم در دسترس باشد و میخواهیم از طریف پدرش در دسترس باشد یعنی خود فاکتور
         //public DbSet<InvoiceLine> InvoiceLines { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbQuery<KeyValueType> KeyValueType { get; set; }
 
         public DbContextS04(DbContextOptions<DbContextS04> dbContextOptions) : base(dbContextOptions)
         {
@@ -42,9 +44,27 @@ namespace ME.S04.Dal.EF
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //در صورتی که بخواهیم خودمان در زمان اجرای برنامه کوئری بنویسیسم دیگر نیاز به کانفیگ زیر نیست
+            //modelBuilder.Query<KeyValueType>().ToView("SqlServerViewName");
+
+
             base.OnModelCreating(modelBuilder);
         }
 
+        public string GetTableName<TEntity>() where TEntity : IBaseEntity
+        {
 
+            var entityType = Model.FindEntityType(typeof(TEntity));
+            var schema = entityType.GetSchema();
+            var tableName = entityType.GetTableName();
+            return string.Concat(schema ?? "dbo" , ".", tableName);
+        }
+
+        public string GetColumnName<TEntity>(string PropertyName) where TEntity : IBaseEntity
+        {
+            var entityType = Model.FindEntityType(typeof(TEntity));
+            var columnName = entityType.FindDeclaredProperty(PropertyName).GetColumnName();
+            return columnName;
+        }
     }
 }

@@ -25,19 +25,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2C68E0A1-2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "S04", "S04", "{7E58E89D-F5B7-4FE3-84EB-849738007401}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ME.S04.Core.DomainModel", "S04\src\01.Core\ME.S04.Core.DomainModel\ME.S04.Core.DomainModel.csproj", "{67A3FEEA-8A67-44EE-A024-89300CEE21B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ME.S04.Core.DomainModel", "S04\src\01.Core\ME.S04.Core.DomainModel\ME.S04.Core.DomainModel.csproj", "{67A3FEEA-8A67-44EE-A024-89300CEE21B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ME.S04.Core.AppService", "S04\src\01.Core\ME.S04.Core.AppService\ME.S04.Core.AppService.csproj", "{B3EF6F93-2EDE-449B-8FF1-D7072CCD07B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ME.S04.Core.AppService", "S04\src\01.Core\ME.S04.Core.AppService\ME.S04.Core.AppService.csproj", "{B3EF6F93-2EDE-449B-8FF1-D7072CCD07B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ME.S04.Core.Contract", "S04\src\01.Core\ME.S04.Core.Contract\ME.S04.Core.Contract.csproj", "{C26879F7-E8A8-4BC3-8207-AEE486D3E2E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ME.S04.Core.Contract", "S04\src\01.Core\ME.S04.Core.Contract\ME.S04.Core.Contract.csproj", "{C26879F7-E8A8-4BC3-8207-AEE486D3E2E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ME.S04.Dal.EF", "S04\src\02.Dal\ME.S04.Dal.EF\ME.S04.Dal.EF.csproj", "{44624B0D-A5B4-41DD-9231-25607B2EFFB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ME.S04.Dal.EF", "S04\src\02.Dal\ME.S04.Dal.EF\ME.S04.Dal.EF.csproj", "{44624B0D-A5B4-41DD-9231-25607B2EFFB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ME.S04.Consumer.Cls", "S04\src\03.Consumer\ME.S04.Consumer.Console\ME.S04.Consumer.Cls.csproj", "{B3A8AD0D-11C3-4E33-B583-EC6A4D159367}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ME.S04.Consumer.Cls", "S04\src\03.Consumer\ME.S04.Consumer.Console\ME.S04.Consumer.Cls.csproj", "{B3A8AD0D-11C3-4E33-B583-EC6A4D159367}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Command", "Command", "{C990D062-F3C0-4C9B-98C0-0C875452177C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ME.S04.Command.ErrorHandling", "S04\src\Command\ME.S04.Command.ErrorHandling\ME.S04.Command.ErrorHandling.csproj", "{6C16A572-A91C-4C09-ABBC-36608D7A93C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ME.S04.Command.ErrorHandling", "S04\src\Command\ME.S04.Command.ErrorHandling\ME.S04.Command.ErrorHandling.csproj", "{6C16A572-A91C-4C09-ABBC-36608D7A93C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ME.S04.Command.Tools", "S04\src\Command\ME.S04.Command.Tools\ME.S04.Command.Tools.csproj", "{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{29146002-96E8-4D8E-BE18-DFCFF35C4DA8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +84,10 @@ Global
 		{6C16A572-A91C-4C09-ABBC-36608D7A93C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C16A572-A91C-4C09-ABBC-36608D7A93C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C16A572-A91C-4C09-ABBC-36608D7A93C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +107,7 @@ Global
 		{B3A8AD0D-11C3-4E33-B583-EC6A4D159367} = {EFFACB1D-D27B-44D8-847D-3631123CB62D}
 		{C990D062-F3C0-4C9B-98C0-0C875452177C} = {539738C2-7F75-4595-8850-34A3BED63BDA}
 		{6C16A572-A91C-4C09-ABBC-36608D7A93C5} = {C990D062-F3C0-4C9B-98C0-0C875452177C}
+		{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7} = {C990D062-F3C0-4C9B-98C0-0C875452177C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F4CBE46-11EC-49BD-B617-BBA5ACEBF260}

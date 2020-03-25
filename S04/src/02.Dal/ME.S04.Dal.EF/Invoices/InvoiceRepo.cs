@@ -1,6 +1,8 @@
 ﻿using ME.S04.Core.Contract.Invoices;
+using ME.S04.Core.DomainModel.General;
 using ME.S04.Core.DomainModel.Invoices;
 using ME.S04.Core.DomainModel.Invoices.DTO;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,6 +24,7 @@ namespace ME.S04.Dal.EF.Invoices
                 CustomerId = invoiceInput.CustomerId
                 ,
                 IssueDate = invoiceInput.IssueDate
+                ,InvoiceLines = new List<InvoiceLine>()
             };
             invoiceModel.InvoiceLines.AddRange(invoiceInput
                 .InvoiceLines
@@ -52,6 +55,47 @@ namespace ME.S04.Dal.EF.Invoices
                 }));
 
             return invoiceInput;
+        }
+
+        public InvoiceJustKey EagerLoading(int id)
+        {
+            return ctx
+                .Invoices
+                .Include(x => x.Customer)
+                .Include(x => x.InvoiceLines)
+                .ThenInclude(x => x.Product)
+                .Select(x => new InvoiceJustKey
+                {
+                    InvoiceId = x.InvoiceId
+                    ,CustomerId  = x.CustomerId
+                    ,InvoiceLines = x.InvoiceLines.Select(l => new InvoiceLineJustKey 
+                    { 
+                        InvoiceLineId = l.InvoiceLineId
+                        ,ProductId = l.ProductId
+                    }).ToList()
+                })
+                .FirstOrDefault(x => x.InvoiceId == id);
+        }
+
+        public InvoiceJustKey ExplicitLoading(int id)
+        {
+            var invoice = ctx.Invoices.First(x => x.InvoiceId == id);
+            //load all
+            ctx.Entry(invoice).Collection(c => c.InvoiceLines).Load();
+            //load with condition
+            //ctx.Entry(invoice).Collection(c => c.InvoiceLines).Query().Where(x => x.Price > 100);
+            ctx.Entry(invoice).Reference(c => c.Customer).Load();
+            
+            return new InvoiceJustKey 
+            {
+                InvoiceId = invoice.InvoiceId 
+                ,CustomerId = invoice.CustomerId
+                ,InvoiceLines =  invoice.InvoiceLines.Select(l => new InvoiceLineJustKey 
+                {
+                    InvoiceLineId = l.InvoiceLineId
+                    ,ProductId = l.ProductId
+                }).ToList()
+            };
         }
     }
 }

@@ -20,5 +20,16 @@ namespace ME.S04.Core.AppService.Invoices
         {
             return unitOfWork.InvoiceRepo.Add(invoiceInput);
         }
+
+        public InvoiceJustKey EagerLoading(int id)
+        {
+            return unitOfWork.InvoiceRepo.EagerLoading(id);
+        }
+
+        public InvoiceJustKey ExplicitLoading(int id)
+        {
+            return unitOfWork.InvoiceRepo.ExplicitLoading(id);
+
+        }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using ME.S04.Core.Contract;
 using ME.S04.Core.Contract.Customers;
 using ME.S04.Core.DomainModel.Customers.DTO;
+using ME.S04.Core.DomainModel.General;
 using ME.S04.Core.DomainModel.Invoices.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ME.S04.Core.AppService.Customers
 {
@@ -20,7 +22,16 @@ namespace ME.S04.Core.AppService.Customers
         public CustomerDTO Add(CustomerDTO customerInput)
         {
             return unitOfWork.CustomerRepo.Add(customerInput);
+        }
 
+        public CustomerDTO Get(int id)
+        {
+            return unitOfWork.CustomerRepo.Get(id);
+        }
+
+        public async Task<IEnumerable<KeyValueType>> LoadCombo()
+        {
+            return await unitOfWork.CustomerRepo.LoadCombo();
         }
     }
 }

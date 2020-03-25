@@ -1,8 +1,9 @@
-﻿using ME.S04.Core.DomainModel.products;
+﻿using ME.S04.Core.DomainModel.General;
+using ME.S04.Core.DomainModel.products;
 
 namespace ME.S04.Core.DomainModel.Invoices
 {
-    public class InvoiceLine
+    public class InvoiceLine : IBaseEntity
     {
         public int InvoiceLineId { get; set; }
         public int Qty { get; set; }

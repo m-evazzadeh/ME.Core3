@@ -11,4 +11,12 @@ namespace ME.S04.Core.DomainModel.Invoices.DTO
         public int CustomerId { get; set; }
         public List<InvoiceLinePersist> InvoiceLines { get; set; }
     }
+
+
+    public class InvoiceJustKey
+    {
+        public int InvoiceId { get; set; }
+        public int CustomerId { get; set; }
+        public List<InvoiceLineJustKey> InvoiceLines { get; set; }
+    }
 }

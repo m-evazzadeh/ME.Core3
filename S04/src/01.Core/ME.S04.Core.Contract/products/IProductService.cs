@@ -5,5 +5,6 @@ namespace ME.S04.Core.Contract.products
     public interface IProductService : IService
     {
         ProductDTO Add(ProductDTO productInput);
+        ProductDTO Get(int id);
     }
 }

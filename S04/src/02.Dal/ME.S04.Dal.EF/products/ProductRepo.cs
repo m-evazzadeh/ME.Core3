@@ -19,5 +19,18 @@ namespace ME.S04.Dal.EF.products
             productInput.ProductId = entry.Entity.ProductId;
             return productInput;
         }
+
+        public ProductDTO Get(int id)
+        {
+            var product = ctx.Products.Find(id);
+            if (product == null)
+                return null;
+
+            return new ProductDTO 
+            { 
+                ProductId = product.ProductId
+                ,Name = product.Name
+            }; 
+        }
     }
 }

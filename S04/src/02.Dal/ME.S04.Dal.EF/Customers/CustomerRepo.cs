@@ -1,6 +1,10 @@
 ﻿using ME.S04.Core.Contract.Customers;
 using ME.S04.Core.DomainModel.Customers.DTO;
 using ME.S04.Core.DomainModel.Customers;
+using ME.S04.Core.DomainModel.General;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace ME.S04.Dal.EF.Customers
 {
@@ -22,6 +26,33 @@ namespace ME.S04.Dal.EF.Customers
             });
             customerInput.CustomerId = result.Entity.CustomerId;
             return customerInput;
+        }
+
+        public CustomerDTO Get(int id)
+        {
+            var customer = ctx.Customers.Find(id);
+            
+            if (customer == null)
+                return null;
+            
+            return new CustomerDTO { 
+            CustomerId = customer.CustomerId
+            ,FName = customer.FName
+            ,LName = customer.LName
+            };
+        }
+
+        public async Task<IEnumerable<KeyValueType>> LoadCombo()
+        {
+            var query = QueryHelper.KeyValueTypeQueryGenerator<Customer>(ctx,nameof(Customer.CustomerId), new List<string> { nameof(Customer.FName) , nameof(Customer.LName) });
+
+            return await ctx
+                .KeyValueType
+                //قابل توجه می باشد برای اجرای این نوع کوئری دیگر لازم نیست 
+                //در دیبیکانتکس به عنوان دیبیکوئری معرفی شود
+                //چون برای ویو ها باید از این کانفیگ استفاده کرد
+                .FromSqlRaw<KeyValueType>(query)
+                .ToListAsync();
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using ME.S04.Command.ErrorHandling;
+using ME.S04.Core.DomainModel.General;
 
 namespace ME.S04.Core.DomainModel.Customers
 {
-    public class Customer
+    public class Customer : IBaseEntity
     {
         private int customerId;
         private string fName;
@@ -35,6 +36,11 @@ namespace ME.S04.Core.DomainModel.Customers
             }
         }
 
+
+        public override string ToString()
+        {
+            return string.Concat(FName, " ", LName);
+        }
 
     }
 }
