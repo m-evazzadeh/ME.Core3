@@ -3,11 +3,12 @@ using ME.S04.Core.DomainModel.General;
 
 namespace ME.S04.Core.DomainModel.Customers
 {
-    public class Customer : IBaseEntity
+    public class Customer : IBaseEntity, ISoftDelete
     {
         private int customerId;
         private string fName;
         private string lName;
+        private bool isDeleted;
 
         public int CustomerId { get => customerId; set => customerId = value; }
         public string FName
@@ -36,6 +37,7 @@ namespace ME.S04.Core.DomainModel.Customers
             }
         }
 
+        public bool IsDeleted { get => isDeleted; set => isDeleted = value; }
 
         public override string ToString()
         {

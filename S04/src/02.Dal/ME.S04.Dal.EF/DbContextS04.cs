@@ -6,11 +6,13 @@ using ME.S04.Core.DomainModel.products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace ME.S04.Dal.EF
 {
     /// <summary>
     /// agar bekhahim ba migration 1 DB besazim bayad in interface ra impliment bekonim
+    /// در واقع برای زمانی هست که از مایگرت بخواهیم استفاده کنیم
     /// </summary>
     public class DbContextFactory : IDesignTimeDbContextFactory<DbContextS04>
     {
@@ -39,7 +41,7 @@ namespace ME.S04.Dal.EF
         //چون نمی خواهیم به صورت مستقیم در دسترس باشد و میخواهیم از طریف پدرش در دسترس باشد یعنی خود فاکتور
         //public DbSet<InvoiceLine> InvoiceLines { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbQuery<KeyValueType> KeyValueType { get; set; }
+        public DbQuery<KeyValueType> KeyValueType { get; private set; }
 
         public DbContextS04(DbContextOptions<DbContextS04> dbContextOptions) : base(dbContextOptions)
         {
@@ -67,9 +69,28 @@ namespace ME.S04.Dal.EF
             //در صورتی که بخواهیم خودمان در زمان اجرای برنامه کوئری بنویسیسم دیگر نیاز به کانفیگ زیر نیست
             //modelBuilder.Query<KeyValueType>().ToView("SqlServerViewName");
 
+            SetHasQueryFilter(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
+        /// <summary>
+        /// در واقع با این متد کلاس هایی که باید حذف منطقی آنها تنظبم کردد نوشته می شود
+        /// در واقع دیگه رکورد هایی که حذف منطقی شده اند هیچ وقت نمایش داده نمی شود
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        private static void SetHasQueryFilter(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Customer>().HasQueryFilter(x => !x.IsDeleted);
+            //در صورت نیاز برای درست کردن همه کلاس ها که نخواهیم آنها را به صورت استاتیک تعریف کنیم
+            //var type = typeof(ISoftDelete);
+            ////لیست کلاس هایی که باید آنها را برای کوئری بالا آماده کرد
+            //var listOfClassInhertanceFromISoftDelete = typeof(ISoftDelete)
+            //    .Assembly
+            //    .GetTypes()
+            //    .Where(x => type.IsAssignableFrom(x));
+        }
+
         /// <summary>
         /// get name of table with Entity
         /// </summary>
@@ -80,7 +101,7 @@ namespace ME.S04.Dal.EF
             var entityType = Model.FindEntityType(typeof(TEntity));
             var schema = entityType.GetSchema();
             var tableName = entityType.GetTableName();
-            return string.Concat(schema ?? "dbo" , ".", tableName);
+            return string.Concat(schema ?? "dbo", ".", tableName);
         }
         /// <summary>
         /// get name of Column with Property Name

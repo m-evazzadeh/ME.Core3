@@ -35,7 +35,7 @@ namespace ME.S04.Consumer.cls
                 //AddInvoice(uow);
                 //var invoiceJustKey = InvoiceEagerLoading(uow);
                 //var invoiceJustKey = InvoiceExplicitLoading(uow);
-                //LoadForComboWithQuryType(uow);
+                LoadForComboWithQuryType(uow);
             }
 
 
