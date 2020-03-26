@@ -1,6 +1,8 @@
-﻿using ME.S04.Core.DomainModel.Customers;
+﻿using ME.S04.Core.DomainModel.Addresses;
+using ME.S04.Core.DomainModel.Customers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,8 +26,32 @@ namespace ME.S04.Dal.EF.Customers
             //builder.Ignore(x => x.FName);
             //builder.Property(c => c.LName).HasColumnType("nvarchar(100)");
             //builder.HasKey(x => x.CustomerId)
+
+            SeeddData(builder);
+
+            ValueConversion(builder);
+
             ShadowProperty(builder);
         }
+        /// <summary>
+        /// ثبت دیتا اولیه در بانک اطلاعاتی
+        /// </summary>
+        /// <param name="builder"></param>
+        private static void SeeddData(EntityTypeBuilder<Customer> builder)
+        {
+            builder.HasData(new Customer { FName = "ali", LName = "ali", IsDeleted = false });
+        }
+
+        /// <summary>
+        /// value conversion
+        /// <para >https://docs.microsoft.com/en-us/ef/core/modeling/value-conversions</para>
+        /// </summary>
+        /// <param name="builder"></param>
+        private static void ValueConversion(EntityTypeBuilder<Customer> builder)
+        {
+            builder.Property(x => x.Address).HasConversion(x => JsonConvert.SerializeObject(x), x => JsonConvert.DeserializeObject<Address>(x));
+            builder.Property(x => x.AddressType).HasConversion(x => x.ToString(), x => (AddressType)Enum.Parse(typeof(AddressType),x.ToString()));
+        }   
 
         /// <summary>
         /// set shadow propperty 

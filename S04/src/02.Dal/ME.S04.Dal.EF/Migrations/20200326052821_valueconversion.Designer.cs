@@ -4,14 +4,16 @@ using ME.S04.Dal.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ME.S04.Dal.EF.Migrations
 {
     [DbContext(typeof(DbContextS04))]
-    partial class DbContextS04ModelSnapshot : ModelSnapshot
+    [Migration("20200326052821_valueconversion")]
+    partial class valueconversion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,33 +144,6 @@ namespace ME.S04.Dal.EF.Migrations
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.OwnsOne("ME.S04.Core.DomainModel.Addresses.Address", "ShippingAddress", b1 =>
-                        {
-                            b1.Property<int>("InvoiceId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("City")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<int>("Floor")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Pelak")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Street")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("InvoiceId");
-
-                            b1.ToTable("Invoices");
-
-                            b1.WithOwner()
-                                .HasForeignKey("InvoiceId");
-                        });
                 });
 
             modelBuilder.Entity("ME.S04.Core.DomainModel.Invoices.InvoiceLine", b =>

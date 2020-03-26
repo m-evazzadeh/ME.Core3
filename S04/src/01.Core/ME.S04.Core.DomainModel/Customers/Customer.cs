@@ -1,16 +1,15 @@
 ﻿using ME.S04.Command.ErrorHandling;
+using ME.S04.Core.DomainModel.Addresses;
 using ME.S04.Core.DomainModel.General;
 
 namespace ME.S04.Core.DomainModel.Customers
 {
     public class Customer : IBaseEntity, ISoftDelete
     {
-        private int customerId;
         private string fName;
         private string lName;
-        private bool isDeleted;
 
-        public int CustomerId { get => customerId; set => customerId = value; }
+        public int CustomerId { get; set; }
         public string FName
         {
             get
@@ -37,7 +36,10 @@ namespace ME.S04.Core.DomainModel.Customers
             }
         }
 
-        public bool IsDeleted { get => isDeleted; set => isDeleted = value; }
+        public bool IsDeleted { get; set; }
+
+        public Address Address { get; set; }
+        public AddressType AddressType { get; set; }
 
         public override string ToString()
         {

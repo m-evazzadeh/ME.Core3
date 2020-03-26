@@ -4,14 +4,16 @@ using ME.S04.Dal.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ME.S04.Dal.EF.Migrations
 {
     [DbContext(typeof(DbContextS04))]
-    partial class DbContextS04ModelSnapshot : ModelSnapshot
+    [Migration("20200326070245_ownedType")]
+    partial class ownedType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,9 +145,12 @@ namespace ME.S04.Dal.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("ME.S04.Core.DomainModel.Addresses.Address", "ShippingAddress", b1 =>
+                    b.OwnsMany("ME.S04.Core.DomainModel.Addresses.Address", "ShippingAddress", b1 =>
                         {
                             b1.Property<int>("InvoiceId")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("Id")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("int")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -162,9 +167,9 @@ namespace ME.S04.Dal.EF.Migrations
                             b1.Property<string>("Street")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("InvoiceId");
+                            b1.HasKey("InvoiceId", "Id");
 
-                            b1.ToTable("Invoices");
+                            b1.ToTable("Address");
 
                             b1.WithOwner()
                                 .HasForeignKey("InvoiceId");

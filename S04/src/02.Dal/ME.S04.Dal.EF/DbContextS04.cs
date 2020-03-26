@@ -4,6 +4,7 @@ using ME.S04.Core.DomainModel.General;
 using ME.S04.Core.DomainModel.Invoices;
 using ME.S04.Core.DomainModel.products;
 using ME.S04.Dal.EF.Customers;
+using ME.S04.Dal.EF.Invoices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Logging;
@@ -29,6 +30,7 @@ namespace ME.S04.Dal.EF
 
     public class DbContextS04 : DbContext, IDbContextS04
     {
+        #region logger
         /// <summary>
         /// <c>Log Query</c>
         /// <c >Install-Package Microsoft.Extensions.Logging.Console</c>
@@ -36,14 +38,17 @@ namespace ME.S04.Dal.EF
         /// </summary>
         public static readonly ILoggerFactory MyLoggerFactory
                 = LoggerFactory.Create(builder => { builder.AddConsole(); });
+        #endregion
 
 
+        #region dbset 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         //چون نمی خواهیم به صورت مستقیم در دسترس باشد و میخواهیم از طریف پدرش در دسترس باشد یعنی خود فاکتور
         //public DbSet<InvoiceLine> InvoiceLines { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbQuery<KeyValueType> KeyValueType { get; private set; }
+        #endregion
 
         public DbContextS04(DbContextOptions<DbContextS04> dbContextOptions) : base(dbContextOptions)
         {
@@ -70,21 +75,28 @@ namespace ME.S04.Dal.EF
         {
             if (Database.IsSqlServer())
                 //set this configuration
-            
 
+
+            #region add configuration
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            modelBuilder.ApplyConfiguration(new InvoiceConfiguration());
+            modelBuilder.ApplyConfiguration(new InvoiceLineConfiguration());
+
             ///In the example above, only one entity type configuration was registered. Larger applications will require multiple type configurations, and as the scope of the application grows, the developer will have to remember to register all new type configurations. A new extension method,
             //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            #endregion
 
-
+            #region other configuration
             //در صورتی که بخواهیم خودمان در زمان اجرای برنامه کوئری بنویسیسم دیگر نیاز به کانفیگ زیر نیست
-            //modelBuilder.Query<KeyValueType>().ToView("SqlServerViewName");
+            //modelBuilder.Query<KeyValueType>().ToView("SqlServerViewName"); 
+            #endregion
 
 
             base.OnModelCreating(modelBuilder);
         }
-        
 
+
+        #region helper
         /// <summary>
         /// get name of table with Entity
         /// </summary>
@@ -108,6 +120,8 @@ namespace ME.S04.Dal.EF
             var entityType = Model.FindEntityType(typeof(TEntity));
             var columnName = entityType.FindDeclaredProperty(PropertyName).GetColumnName();
             return columnName;
-        }
+        } 
+        #endregion
+
     }
 }
