@@ -11,6 +11,12 @@ namespace ME.S04.Core.Contract.Customers
         CustomerDTO Get(int id);
         Task<IEnumerable<KeyValueType>> LoadCombo();
         int CreateBy(int id);
+        /// <summary>
+        /// Remove all data from table
+        /// note: ExecuteSqlCommand
+        /// </summary>
+        /// <returns></returns>
+        Task<int> ReamoveAllAsync();
     
     }
 }

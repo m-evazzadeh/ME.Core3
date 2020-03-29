@@ -76,5 +76,18 @@ namespace ME.S04.Dal.EF.Customers
                 .FromSqlRaw<KeyValueType>(query)
                 .ToListAsync();
         }
+        /// <summary>
+        /// Remove all data from table
+        /// note: ExecuteSqlCommand
+        /// </summary>
+        /// <returns></returns>
+        public async Task<int> ReamoveAllAsync()
+        {
+            string query = QueryHelper.RemoveAll<Customer>(ctx);
+            ctx.Database.BeginTransaction();
+            var rowsAffected = ctx.Database.ExecuteSqlCommandAsync(query, null);
+            ctx.Database.CommitTransaction();
+            return await rowsAffected;
+        }
     }
 }

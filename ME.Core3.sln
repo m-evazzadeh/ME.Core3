@@ -39,12 +39,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Command", "Command", "{C990
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ME.S04.Command.ErrorHandling", "S04\src\Command\ME.S04.Command.ErrorHandling\ME.S04.Command.ErrorHandling.csproj", "{6C16A572-A91C-4C09-ABBC-36608D7A93C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ME.S04.Command.Tools", "S04\src\Command\ME.S04.Command.Tools\ME.S04.Command.Tools.csproj", "{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ME.S04.Command.Tools", "S04\src\Command\ME.S04.Command.Tools\ME.S04.Command.Tools.csproj", "{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{29146002-96E8-4D8E-BE18-DFCFF35C4DA8}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "S10", "S10", "{B3B69130-5689-4417-8D12-74B4538EE60A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Session10.HelloWorld", "Session10.HelloWorld\Session10.HelloWorld.csproj", "{9AB5AABA-A91B-403A-BAE1-F8E182840025}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +92,10 @@ Global
 		{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AB5AABA-A91B-403A-BAE1-F8E182840025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB5AABA-A91B-403A-BAE1-F8E182840025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB5AABA-A91B-403A-BAE1-F8E182840025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB5AABA-A91B-403A-BAE1-F8E182840025}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +116,7 @@ Global
 		{C990D062-F3C0-4C9B-98C0-0C875452177C} = {539738C2-7F75-4595-8850-34A3BED63BDA}
 		{6C16A572-A91C-4C09-ABBC-36608D7A93C5} = {C990D062-F3C0-4C9B-98C0-0C875452177C}
 		{2F8C9881-3FE9-468A-95B7-EC2CD6BAAAA7} = {C990D062-F3C0-4C9B-98C0-0C875452177C}
+		{9AB5AABA-A91B-403A-BAE1-F8E182840025} = {B3B69130-5689-4417-8D12-74B4538EE60A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F4CBE46-11EC-49BD-B617-BBA5ACEBF260}

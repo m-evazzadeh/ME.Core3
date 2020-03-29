@@ -35,11 +35,12 @@ namespace ME.S04.Dal.EF.Customers
         }
         /// <summary>
         /// ثبت دیتا اولیه در بانک اطلاعاتی
+        /// نکته در اینجا حتی فیلد identity رو باید خودت مقدار بدی البته برای migration یک سری نکته وجود دارد که در درس مربوط نوشته شده است
         /// </summary>
         /// <param name="builder"></param>
         private static void SeeddData(EntityTypeBuilder<Customer> builder)
         {
-            builder.HasData(new Customer { FName = "ali", LName = "ali", IsDeleted = false });
+            //builder.HasData(new Customer {CustomerId = 1, FName = "ali", LName = "ali", IsDeleted = false });
         }
 
         /// <summary>

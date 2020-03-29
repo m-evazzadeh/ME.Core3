@@ -12,5 +12,6 @@ namespace ME.S04.Core.Contract.Customers
         CustomerDTO Get(int id);
         Task<IEnumerable<KeyValueType>> LoadCombo();
         int CreateBy(int id);
+        Task<int> ReamoveAllAsync();
     }
 }

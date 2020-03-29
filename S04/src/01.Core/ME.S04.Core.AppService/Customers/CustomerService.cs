@@ -38,5 +38,10 @@ namespace ME.S04.Core.AppService.Customers
         {
             return await unitOfWork.CustomerRepo.LoadCombo();
         }
+
+        public async Task<int> ReamoveAllAsync()
+        {
+            return await unitOfWork.CustomerRepo.ReamoveAllAsync();
+        }
     }
 }

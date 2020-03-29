@@ -5,6 +5,7 @@ using ME.S04.Core.Contract;
 using ME.S04.Core.Contract.Customers;
 using ME.S04.Core.Contract.Invoices;
 using ME.S04.Core.Contract.products;
+using ME.S04.Core.DomainModel.Customers;
 using ME.S04.Core.DomainModel.Customers.DTO;
 using ME.S04.Core.DomainModel.General;
 using ME.S04.Core.DomainModel.Invoices.DTO;
@@ -35,12 +36,25 @@ namespace ME.S04.Consumer.cls
                 //AddInvoice(uow);
                 //var invoiceJustKey = InvoiceEagerLoading(uow);
                 //var invoiceJustKey = InvoiceExplicitLoading(uow);
-                LoadForComboWithQuryType(uow);
+                //LoadForComboWithQuryType(uow);
+                //UpdateDiscountedPerformance(ctx);
+
             }
 
 
 
 
+        }
+
+        /// <summary>
+        /// در صورت نیاز به ویرایش به صورت غیر متصل و با بهینه سازی خیلی خوب
+        /// </summary>
+        /// <param name="ctx"></param>
+        private static void UpdateDiscountedPerformance(DbContextS04 ctx)
+        {
+            Customer c = new Customer() { CustomerId = 1, FName = "ali" };
+            ctx.Entry(c).Property(x => x.FName).IsModified = true;
+            ctx.SaveChanges();
         }
 
         /// <summary>
